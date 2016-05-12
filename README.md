@@ -1,2 +1,2 @@
-# Academe_Faculty
-Academe Instructor and Faculty Management System
+# Academe Faculty
+Vanilla Integration in Managing Faculty/Instructor for Academe Systems 
