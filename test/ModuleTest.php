@@ -25,9 +25,9 @@
  * THE SOFTWARE.
  */
 
-namespace FacultyTest;
+namespace Academe\FacultyTest;
 
-use Faculty\Module as ModuleConfig;
+use Academe\Faculty\Module as ModuleConfig;
 
 class ModuleTest extends \PHPUnit_Framework_TestCase
 {

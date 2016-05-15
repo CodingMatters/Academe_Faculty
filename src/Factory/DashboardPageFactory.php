@@ -25,9 +25,9 @@
  * THE SOFTWARE.
  */
 
-namespace Faculty\Factory;
+namespace Academe\Faculty\Factory;
 
-use Academe\Prospectus\Action\DashboardPageAction;
+use Academe\Faculty\Action\DashboardPageAction;
 use Interop\Container\ContainerInterface;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;

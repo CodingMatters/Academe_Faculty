@@ -4,7 +4,7 @@
  * The MIT License
  *
  * Copyright 2016 Coding Matters, Inc.
- * Author  Gab Amba <gamba@gabbydgab.com>
+ * Author: Gab Amba <gamba@gabbydgab.com>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,43 +25,43 @@
  * THE SOFTWARE.
  */
 
-namespace Faculty;
+namespace Academe\Faculty\Action;
 
-use Zend\Mvc\ModuleRouteListener;
-use Zend\Mvc\MvcEvent;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Expressive\Router;
+use Zend\Expressive\Template;
 
-class Module
+class DashboardPageAction
 {
-    public function onBootstrap(MvcEvent $e)
+    /**
+ * @var Router\RouterInterface
+*/
+    private $router;
+
+    /**
+ * @var Template\TemplateRendererInterface
+*/
+    private $template;
+
+    public function __construct(Router\RouterInterface $router, Template\TemplateRendererInterface $template = null)
     {
-        $eventManager        = $e->getApplication()->getEventManager();
-        $moduleRouteListener = new ModuleRouteListener();
-        $moduleRouteListener->attach($eventManager);
+        $this->router   = $router;
+        $this->template = $template;
     }
 
-    public function getConfig()
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
-        return include __DIR__ . '/config/module.config.php';
-    }
+        if (!$this->template) {
+            return new JsonResponse(
+                [
+                'welcome' => 'Congratulations! You have installed the zend-expressive skeleton application.',
+                'docsUrl' => 'zend-expressive.readthedocs.org',
+                ]
+            );
+        }
 
-    public function getAutoloaderConfig()
-    {
-        return array(
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                ),
-            ),
-        );
-    }
-    
-    public function getControllerConfig()
-    {
-        return include __DIR__ . '/config/autoload/controller.config.php';
-    }
-    
-    public function getServiceConfig()
-    {
-        return include __DIR__ . '/config/autoload/container.config.php';
+        return new HtmlResponse($this->template->render('prospectus::dashboard-page', ["yolo" => "YOLO!!!"]));
     }
 }

@@ -4,7 +4,7 @@
  * The MIT License
  *
  * Copyright 2016 Coding Matters, Inc.
- * Author: Gab Amba <gamba@gabbydgab.com>.
+ * Author  Gab Amba <gamba@gabbydgab.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,43 +25,43 @@
  * THE SOFTWARE.
  */
 
-namespace Faculty\Action;
+namespace Academe\Faculty;
 
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Expressive\Router;
-use Zend\Expressive\Template;
+use Zend\Mvc\ModuleRouteListener;
+use Zend\Mvc\MvcEvent;
 
-class DashboardPageAction
+class Module
 {
-    /**
- * @var Router\RouterInterface
-*/
-    private $router;
-
-    /**
- * @var Template\TemplateRendererInterface
-*/
-    private $template;
-
-    public function __construct(Router\RouterInterface $router, Template\TemplateRendererInterface $template = null)
+    public function onBootstrap(MvcEvent $e)
     {
-        $this->router   = $router;
-        $this->template = $template;
+        $eventManager        = $e->getApplication()->getEventManager();
+        $moduleRouteListener = new ModuleRouteListener();
+        $moduleRouteListener->attach($eventManager);
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    public function getConfig()
     {
-        if (!$this->template) {
-            return new JsonResponse(
-                [
-                'welcome' => 'Congratulations! You have installed the zend-expressive skeleton application.',
-                'docsUrl' => 'zend-expressive.readthedocs.org',
-                ]
-            );
-        }
+        return include __DIR__ . '/../config/module.config.php';
+    }
 
-        return new HtmlResponse($this->template->render('prospectus::dashboard-page', ["yolo" => "YOLO!!!"]));
+    public function getAutoloaderConfig()
+    {
+        return [
+            'Zend\Loader\StandardAutoloader' => [
+                'namespaces' => [
+                    __NAMESPACE__ => __DIR__ . '/src',
+                ],
+            ],
+        ];
+    }
+
+    public function getControllerConfig()
+    {
+        return include __DIR__ . '/../config/autoload/controller.config.php';
+    }
+
+    public function getServiceConfig()
+    {
+        return include __DIR__ . '/../config/autoload/container.config.php';
     }
 }
