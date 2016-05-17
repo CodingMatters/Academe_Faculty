@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * The MIT License
  *
  * Copyright 2016 Coding Matters, Inc.
@@ -25,27 +25,23 @@
  * THE SOFTWARE.
  */
 
-namespace Academe\FacultyTest;
+namespace Academe\Faculty\Page;
 
-use Academe\Faculty\Module as ModuleConfig;
+use Zend\Expressive\Template\TemplateRendererInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Zend\Expressive\Router\RouterInterface;
+use Zend\Diactoros\Response\HtmlResponse;
+use Psr\Http\Message\ResponseInterface;
 
-class ModuleTest extends \PHPUnit_Framework_TestCase
+final class IndexPage extends AbstractPage
 {
-    /**
- * Academe\Prospectus\Module 
-*/
-    private $module;
-    
-    public function setUp()
+    public function __construct(RouterInterface $router, TemplateRendererInterface $template = null)
     {
-        $this->module = new ModuleConfig();
+        parent::__construct($router, $template);
     }
 
-    /**
-     * @test
-     */
-    public function checkRouterConfig()
+    public function dispatch(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
-        $this->assertArrayHasKey('router', $this->module->getConfig());
+        return new HtmlResponse($this->template->render("faculty::index", $this->data));
     }
 }
