@@ -25,7 +25,7 @@
  * THE SOFTWARE.
  */
 
-namespace Academe\Student\Factory;
+namespace Academe\Faculty\Factory;
 
 use Zend\Expressive\Template\TemplateRendererInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
