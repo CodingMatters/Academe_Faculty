@@ -5,7 +5,7 @@ use CodingMatters\Kernel;
 
 return [
     "dependencies" =>  [
-        'aliases'       => [],        
+        'aliases'       => [],
         'invokables'    => [],
         'factories'     => [
             Faculty\Page\IndexPage::class => Kernel\Factory\PageFactory::class
