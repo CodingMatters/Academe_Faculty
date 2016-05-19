@@ -25,40 +25,24 @@
  * THE SOFTWARE.
  */
 
-namespace Academe\Faculty\Factory;
+namespace Academe\Faculty\Page;
 
+use CodingMatters\Kernel\Page\AbstractPage;
 use Zend\Expressive\Template\TemplateRendererInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Zend\Expressive\Router\RouterInterface;
-use Interop\Container\ContainerInterface;
+use Zend\Diactoros\Response\HtmlResponse;
+use Psr\Http\Message\ResponseInterface;
 
-/**
- * This factory create HTML PAGE ONLY.
- *
- * @todo Recommend to create separate factories which do not share any common feature.
- */
-final class PageFactory implements FactoryInterface
+final class ProfilePage extends AbstractPage
 {
-    /**
-     * This pattern can often replace abstract factories, and is more performant:
-     *
-     *   1. Lookups for services do not need to query abstract factories; the service is mapped explicitly
-     *   2. Once the factory is loaded for any object, it stays in memory for any other service using the same factory
-     *
-     * @see http://zendframework.github.io/zend-servicemanager/configuring-the-service-manager/#factories
-     *
-     *
-     * @param ContainerInterface $container
-     * @param FQCN $requestedName
-     * @param array $options
-     */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __construct(RouterInterface $router, TemplateRendererInterface $template = null)
     {
-        $router = $container->get(RouterInterface::class);
-        $template = ($container->has(TemplateRendererInterface::class))
-            ? $container->get(TemplateRendererInterface::class)
-            : null;
+        parent::__construct($router, $template);
+    }
 
-        return new $requestedName($router, $template);
+    public function dispatch(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    {
+        return new HtmlResponse($this->template->render("faculty::profile", $this->data));
     }
 }

@@ -1,11 +1,27 @@
 <?php
 
+use Academe\Faculty;
+use CodingMatters\Kernel;
+
 return [
+    "dependencies" =>  [
+        'aliases'       => [],        
+        'invokables'    => [],
+        'factories'     => [
+            Faculty\Page\IndexPage::class => Kernel\Factory\PageFactory::class
+        ],
+    ],
     'routes' => [
         [
             'name' => 'faculty',
             'path' => '/faculty',
-            'middleware' => Academe\Faculty\Page\IndexPage::class,
+            'middleware' => Faculty\Page\IndexPage::class,
+            'allowed_methods' => ['GET'],
+        ],
+        [
+            'name' => 'faculty-profile',
+            'path' => '/faculty/profile',
+            'middleware' => Faculty\Page\ProfilePage::class,
             'allowed_methods' => ['GET'],
         ]
     ]
