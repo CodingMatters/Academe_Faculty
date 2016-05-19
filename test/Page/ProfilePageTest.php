@@ -18,7 +18,7 @@ class ProfilePageTest extends \PHPUnit_Framework_TestCase
 {
     /** @var RouterInterface */
     protected $router;
-    
+
     /** @var TemplateRendererInterface */
     protected $template;
 
