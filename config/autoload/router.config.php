@@ -8,7 +8,8 @@ return [
         'aliases'       => [],
         'invokables'    => [],
         'factories'     => [
-            Faculty\Page\IndexPage::class => Kernel\Factory\PageFactory::class
+            Faculty\Page\IndexPage::class   => Kernel\Factory\PageFactory::class,
+            Faculty\Page\ProfilePage::class => Kernel\Factory\PageFactory::class,
         ],
     ],
     'routes' => [
