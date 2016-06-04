@@ -25,24 +25,27 @@
  * THE SOFTWARE.
  */
 
-namespace Academiae\Faculty\Page;
+namespace Academiae\Faculty;
 
-use CodingMatters\Kernel\Page\AbstractPage;
-use Zend\Expressive\Template\TemplateRendererInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Zend\Expressive\Router\RouterInterface;
-use Zend\Diactoros\Response\HtmlResponse;
-use Psr\Http\Message\ResponseInterface;
-
-final class ProfilePage extends AbstractPage
+class ConfigProvider
 {
-    public function __construct(RouterInterface $router, TemplateRendererInterface $template = null)
-    {
-        parent::__construct($router, $template);
-    }
 
-    public function dispatch(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    /**
+     * Return configuration for this component.
+     *
+     * @return array
+     */
+    public function __invoke()
     {
-        return new HtmlResponse($this->template->render("faculty::profile", $this->data));
+        return $this->getDependencyConfig();
+    }
+    /**
+     * Return dependency mappings for this component.
+     *
+     * @return array
+     */
+    public function getDependencyConfig()
+    {
+        return include __DIR__ . '/../config/module.config.php';
     }
 }

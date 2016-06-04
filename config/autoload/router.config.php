@@ -1,14 +1,15 @@
 <?php
 
-use Academe\Faculty;
+use Academiae\Faculty;
 use CodingMatters\Kernel;
 
 return [
     "dependencies" =>  [
-        'aliases'       => [],        
+        'aliases'       => [],
         'invokables'    => [],
         'factories'     => [
-            Faculty\Page\IndexPage::class => Kernel\Factory\PageFactory::class
+            Faculty\Page\IndexPage::class   => Kernel\Factory\PageFactory::class,
+            Faculty\Page\ProfilePage::class => Kernel\Factory\PageFactory::class,
         ],
     ],
     'routes' => [

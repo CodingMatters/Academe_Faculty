@@ -8,7 +8,7 @@ return [
         ]
     ],
     'view_helpers'  => [
-        'aliases'       => [],        
+        'aliases'       => [],
         'invokables'    => [],
         'factories'     => []
     ]
