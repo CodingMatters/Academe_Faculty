@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * The MIT License
  *
  * Copyright 2016 Coding Matters, Inc.
@@ -25,12 +25,16 @@
  * THE SOFTWARE.
  */
 
-namespace Academe\Faculty;
+namespace Academiae\Faculty;
 
 class Module
 {
-    public function __invoke()
+    /**
+     * Return default configuration for zend-mvc applications.
+     */
+    public function getConfig()
     {
-        return include __DIR__ . '/../config/module.config.php';
+        $provider = new ConfigProvider();
+        return $provider->getDependencyConfig();
     }
 }

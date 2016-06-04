@@ -6,9 +6,9 @@
  * and open the template in the editor.
  */
 
-namespace Academe\FacultyTest;
+namespace Academiae\FacultyTest;
 
-use Academe\Faculty\Module as ModuleConfig;
+use Academiae\Faculty\Module;
 
 class ModuleTest extends \PHPUnit_Framework_TestCase
 {
@@ -16,8 +16,8 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $module = new ModuleConfig();
-        $this->config = $module();
+        $module = new Module();
+        $this->config = $module->getConfig();
     }
 
     /**

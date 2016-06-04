@@ -25,7 +25,7 @@
  * THE SOFTWARE.
  */
 
-namespace Academe\Faculty\Page;
+namespace Academiae\Faculty\Page;
 
 use CodingMatters\Kernel\Page\AbstractPage;
 use Zend\Expressive\Template\TemplateRendererInterface;

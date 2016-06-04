@@ -1,6 +1,6 @@
 <?php
 
-use Academe\Faculty;
+use Academiae\Faculty;
 use CodingMatters\Kernel;
 
 return [
