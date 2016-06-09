@@ -3,8 +3,7 @@
 /**
  * The MIT License
  *
- * Copyright 2016 Coding Matters, Inc.
- * Author  Gab Amba <gamba@gabbydgab.com>
+ * Copyright (c) 2016, Coding Matters, Inc. (Gab Amba <gamba@gabbydgab.com>)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,12 +28,24 @@ namespace Academiae\Faculty;
 
 class Module
 {
+    private $config = [];
+
     /**
      * Return default configuration for zend-mvc applications.
      */
     public function getConfig()
     {
         $provider = new ConfigProvider();
-        return $provider->getDependencyConfig();
+
+        $this->config = $provider->getTemplateConfig();
+        $this->config['middleware_pipeline']    = $provider->getMiddlewareConfig();
+        $this->config['service_manager']        = $provider->getDependencyConfig();
+        $this->config['router']['routes']       = $provider->getRouteConfig();
+        $this->config['navigation']             = $provider->getNavigationConfig();
+        $this->config['controllers']            = $provider->getControllerConfig();
+        $this->config['controller_plugins']     = $provider->getControllerPluginConfig();
+
+        // Overrides the default config to use Glob module config
+        return array_merge_recursive($this->config, $provider->getGlobConfig());
     }
 }

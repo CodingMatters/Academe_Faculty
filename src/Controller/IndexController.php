@@ -3,8 +3,7 @@
 /**
  * The MIT License
  *
- * Copyright 2016 Coding Matters, Inc.
- * Author  Gab Amba <gamba@gabbydgab.com>
+ * Copyright (c) 2016 Coding Matters, Inc. (Gab Amba <gamba@gabbydgab.com>)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,24 +24,15 @@
  * THE SOFTWARE.
  */
 
-namespace Academiae\Faculty\Page;
+namespace Academiae\Faculty\Controller;
 
-use CodingMatters\Kernel\Page\AbstractPage;
-use Zend\Expressive\Template\TemplateRendererInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Zend\Expressive\Router\RouterInterface;
-use Zend\Diactoros\Response\HtmlResponse;
-use Psr\Http\Message\ResponseInterface;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
 
-final class ProfilePage extends AbstractPage
+class IndexController
 {
-    public function __construct(RouterInterface $router, TemplateRendererInterface $template = null)
+    public function indexAction()
     {
-        parent::__construct($router, $template);
-    }
-
-    public function dispatch(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
-    {
-        return new HtmlResponse($this->template->render("faculty::profile", $this->data));
+        return new ViewModel();
     }
 }
