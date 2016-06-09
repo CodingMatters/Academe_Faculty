@@ -32,10 +32,14 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     public function configKeys()
     {
         return [
-            'dependencies'          => ['dependencies'],
+            'service_manager'       => ['service_manager'],
             'templates'             => ['templates'],
+            'view_manager'          => ['view_manager'],
             'middleware_pipeline'   => ['middleware_pipeline'],
-            'routes'                => ['routes']
+            'router'                => ['router'],
+            'view_helpers'          => ['view_helpers'],
+            'controllers'           => ['controllers'],
+            'controller_plugins'    => ['controller_plugins'],
         ];
     }
 }
