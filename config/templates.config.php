@@ -13,7 +13,7 @@ return [
     'templates'     => [
         'map'   => [],
         'paths' => [
-            'view'  => [__DIR__ . '/../view']
+            'faculty'  => [__DIR__ . '/../view']
         ]
     ],
 
